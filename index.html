@@ -9,79 +9,96 @@
   </head>
   <body>
     <!-- Title -->
-    <div class="title">
+    <header>
       <h1>Salary Calculator</h1>
-    </div>
+    </header>
     <!-- End of Title -->
     <!-- Input Form -->
     <div class="form-control">
+      <h2>Add Employee</h2>
       <form class="input-form">
-        <h2>Add Employee</h2>
-        <label for="first-name">First Name</label>
-        <input
-          type="text"
-          name="first-name"
-          id="first-name"
-          placeholder="First Name"
-        />
-        <label for="last-name">Last Name</label>
-        <input
-          type="text"
-          name="last-name"
-          id="last-name"
-          placeholder="Last Name"
-        />
-        <label for="id-number">ID#</label>
-        <input
-          type="number"
-          name="id-number"
-          id="id-number"
-          placeholder="ID#"
-        />
-        <label for="job-title">Job Title</label>
-        <input
-          type="text"
-          name="job-title"
-          id="job-title"
-          placeholder="Job Title"
-        />
-        <label for="annual-salary">Annual Salary</label>
-        <input
-          type="number"
-          name="annual-salary"
-          id="annual-salary"
-          placeholder="Annual Salary"
-        />
+        <div class="input-container">
+          <div class="input">
+            <label for="first-name">First Name</label>
+            <input
+              type="text"
+              name="first-name"
+              id="first-name"
+              placeholder="First Name"
+            />
+          </div>
+          <div class="input">
+            <label for="last-name">Last Name</label>
+            <input
+              type="text"
+              name="last-name"
+              id="last-name"
+              placeholder="Last Name"
+            />
+          </div>
+          <div class="input">
+            <label for="id-number">ID#</label>
+            <input
+              type="number"
+              name="id-number"
+              id="id-number"
+              placeholder="ID#"
+            />
+          </div>
+          <div class="input">
+            <label for="job-title">Job Title</label>
+            <input
+              type="text"
+              name="job-title"
+              id="job-title"
+              placeholder="Job Title"
+            />
+          </div>
+          <div class="input">
+            <label for="annual-salary">Annual Salary</label>
+            <input
+              type="number"
+              name="annual-salary"
+              id="annual-salary"
+              placeholder="Annual Salary"
+            />
+          </div>
+        </div>
         <button type="submit" class="btn submit-btn">Submit</button>
       </form>
     </div>
     <!-- End of Input Form -->
     <!-- Table -->
-    <table>
-      <thead>
-        <h2>Employees</h2>
-        <tr>
-          <th>Frist Name</th>
-          <th>Last Name</th>
-          <th>ID#</th>
-          <th>Job Title</th>
-          <th>Annual Salary</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Luke</td>
-          <td>Gartner</td>
-          <td>13598</td>
-          <td>Worker</td>
-          <td>$123,456</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-control">
+      <table>
+        <thead>
+          <h2>Employees</h2>
+          <tr>
+            <th>Frist Name</th>
+            <th>Last Name</th>
+            <th>ID#</th>
+            <th>Job Title</th>
+            <th>Annual Salary</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Luke</td>
+            <td>Gartner</td>
+            <td>13598</td>
+            <td>Worker</td>
+            <td>$123,456</td>
+            <td>x</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <!-- End of Table -->
     <!-- Total Monthly Salary Expense -->
-    <h2>Total Monthly: $<span class="total-monthly">123,456.00</span></h2>
+    <h2 class="total-monthly">
+      Total Monthly: $<span class="total-monthly-span">123,456.00</span>
+    </h2>
     <!-- End of Total Monthly Salary Expense -->
     <script src="./index.js"></script>
   </body>

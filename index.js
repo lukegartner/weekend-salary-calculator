@@ -8,6 +8,7 @@ const idInput = document.querySelector("#id-number");
 const jobTitleInput = document.querySelector("#job-title");
 const annualSalaryInput = document.querySelector("#annual-salary");
 const tableBody = document.querySelector("tbody");
+const totalMonthlySpan = document.querySelector(".total-monthly-span");
 
 // Handle Submit
 const handleSubmit = (e) => {
@@ -46,4 +47,13 @@ const displayData = () => {
   idInput.value = "";
   jobTitleInput.value = "";
   annualSalaryInput.value = "";
+
+  totalMonthlySpan.innerHTML = getTotalMonthly();
+  totalMonthlySpan.classList = getTotalMonthly() >= 20000 ? "red" : "";
+};
+
+const getTotalMonthly = () => {
+  return employees.reduce((total, current) => {
+    return total + current.annualSalary / 12;
+  }, 0);
 };

@@ -107,3 +107,6 @@ table {
   text-align: right;
   margin-right: 1rem;
 }
+.red {
+  color: var(--red-1);
+}

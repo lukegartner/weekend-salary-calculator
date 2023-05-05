@@ -30,13 +30,13 @@ const displayData = () => {
   tableBody.innerHTML = employees
     .map(({ firstName, lastName, id, jobTitle, annualSalary }, index) => {
       return `
-          <tr class=${index % 2 !== 0 ? "row-light" : ""}>
+          <tr data-id="${index}" class=${index % 2 !== 0 ? "row-light" : ""} >
             <td>${firstName}</td>
             <td>${lastName}</td>
             <td>${id}</td>
             <td>${jobTitle}</td>
             <td>$${annualSalary}</td>
-            <td>x</td>
+            <td onClick="removeEmployee(event)">x</td>
           </tr>
 `;
     })
@@ -52,8 +52,15 @@ const displayData = () => {
   totalMonthlySpan.classList = getTotalMonthly() >= 20000 ? "red" : "";
 };
 
+// get total monthly
 const getTotalMonthly = () => {
   return employees.reduce((total, current) => {
     return total + current.annualSalary / 12;
   }, 0);
+};
+
+// remove employee
+const removeEmployee = (e) => {
+  employees.splice(e.target.dataset.id, 1);
+  displayData();
 };

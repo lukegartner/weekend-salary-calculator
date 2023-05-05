@@ -27,9 +27,9 @@ const handleSubmit = (e) => {
 const displayData = () => {
   // display form
   tableBody.innerHTML = employees
-    .map(({ firstName, lastName, id, jobTitle, annualSalary }) => {
+    .map(({ firstName, lastName, id, jobTitle, annualSalary }, index) => {
       return `
-          <tr>
+          <tr class=${index % 2 !== 0 ? "row-light" : ""}>
             <td>${firstName}</td>
             <td>${lastName}</td>
             <td>${id}</td>

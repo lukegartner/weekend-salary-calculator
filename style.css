@@ -98,6 +98,9 @@ table {
   width: 95%;
   margin: 0 auto;
 }
+.row-light {
+  background-color: var(--blue-1);
+}
 
 /* total */
 .total-monthly {

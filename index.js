@@ -1,5 +1,7 @@
 // Global Employeees Data
-const employees = [];
+const employees = localStorage.getItem("employees")
+  ? JSON.parse(localStorage.getItem("employees"))
+  : [];
 
 // is edit
 let isEditing = false;
@@ -33,6 +35,7 @@ const handleSubmit = (e) => {
     editIndex = NaN;
     submitBtn.innerHTML = "Submit";
   }
+  setLocatStorage();
   displayData();
 };
 
@@ -74,9 +77,10 @@ const getTotalMonthly = () => {
 // remove employee
 const removeEmployee = (e) => {
   employees.splice(e.target.parentElement.dataset.id, 1);
+  setLocatStorage();
   displayData();
 };
-
+displayData();
 // edit employee
 const editEmployee = (e) => {
   const { firstName, lastName, id, jobTitle, annualSalary } =
@@ -91,4 +95,9 @@ const editEmployee = (e) => {
   submitBtn.innerHTML = "Edit";
   isEditing = true;
   editIndex = e.target.parentElement.dataset.id;
+};
+
+// Local Storage
+const setLocatStorage = () => {
+  localStorage.setItem("employees", JSON.stringify(employees));
 };

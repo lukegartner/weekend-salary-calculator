@@ -16,6 +16,16 @@ const annualSalaryInput = document.querySelector("#annual-salary");
 const tableBody = document.querySelector("tbody");
 const totalMonthlySpan = document.querySelector(".total-monthly-span");
 const submitBtn = document.querySelector(".submit-btn");
+const sortSalaryAscendingBtn = document.querySelector(".sort-salary-ascending");
+const sortSalaryDescendingBtn = document.querySelector(
+  ".sort-salary-descending"
+);
+const sortLastNameAscendingBtn = document.querySelector(
+  ".sort-last-name-ascending"
+);
+const sortLastNameDescendingBtn = document.querySelector(
+  ".sort-last-name-descending"
+);
 
 // Handle Submit
 const handleSubmit = (e) => {
@@ -36,12 +46,12 @@ const handleSubmit = (e) => {
     submitBtn.innerHTML = "Submit";
   }
   setLocatStorage();
-  displayData();
+  displayData(employees);
 };
 
-const displayData = () => {
+const displayData = (employeesData) => {
   // display form
-  tableBody.innerHTML = employees
+  tableBody.innerHTML = employeesData
     .map(({ firstName, lastName, id, jobTitle, annualSalary }, index) => {
       return `
           <tr data-id="${index}" class=${index % 2 !== 0 ? "row-light" : ""} >
@@ -78,9 +88,9 @@ const getTotalMonthly = () => {
 const removeEmployee = (e) => {
   employees.splice(e.target.parentElement.dataset.id, 1);
   setLocatStorage();
-  displayData();
+  displayData(employees);
 };
-displayData();
+displayData(employees);
 // edit employee
 const editEmployee = (e) => {
   const { firstName, lastName, id, jobTitle, annualSalary } =
@@ -100,4 +110,45 @@ const editEmployee = (e) => {
 // Local Storage
 const setLocatStorage = () => {
   localStorage.setItem("employees", JSON.stringify(employees));
+};
+
+// Sort
+sortSalaryAscendingBtn.addEventListener("click", () => {
+  displayData(sort(employees, "annualSalary", "ascending"));
+  setLocatStorage();
+});
+sortSalaryDescendingBtn.addEventListener("click", () => {
+  displayData(sort(employees, "annualSalary", "descending"));
+  setLocatStorage();
+});
+sortLastNameAscendingBtn.addEventListener("click", () => {
+  displayData(sort(employees, "lastName", "ascending"));
+  setLocatStorage();
+});
+sortLastNameDescendingBtn.addEventListener("click", () => {
+  displayData(sort(employees, "lastName", "descending"));
+  setLocatStorage();
+});
+
+const sort = (unsorted, property, direction) => {
+  if (property === "annualSalary") {
+    if (direction === "ascending") {
+      return unsorted.sort((a, b) => a[property] - b[property]);
+    }
+    if (direction === "descending") {
+      return unsorted.sort((a, b) => b[property] - a[property]);
+    }
+  }
+  if (property === "lastName") {
+    if (direction === "ascending") {
+      return unsorted.sort((a, b) =>
+        a[property].toLowerCase() < b[property].toLowerCase() ? -1 : 1
+      );
+    }
+    if (direction === "descending") {
+      return unsorted.sort((a, b) =>
+        b[property].toLowerCase() > a[property].toLowerCase() ? 1 : -1
+      );
+    }
+  }
 };

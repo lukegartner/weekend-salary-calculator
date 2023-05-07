@@ -3,7 +3,7 @@ const employees = localStorage.getItem("employees")
   ? JSON.parse(localStorage.getItem("employees"))
   : [];
 
-// is edit
+// Edit variables
 let isEditing = false;
 let editIndex = NaN;
 
@@ -16,16 +16,7 @@ const annualSalaryInput = document.querySelector("#annual-salary");
 const tableBody = document.querySelector("tbody");
 const totalMonthlySpan = document.querySelector(".total-monthly-span");
 const submitBtn = document.querySelector(".submit-btn");
-const sortSalaryAscendingBtn = document.querySelector(".sort-salary-ascending");
-const sortSalaryDescendingBtn = document.querySelector(
-  ".sort-salary-descending"
-);
-const sortLastNameAscendingBtn = document.querySelector(
-  ".sort-last-name-ascending"
-);
-const sortLastNameDescendingBtn = document.querySelector(
-  ".sort-last-name-descending"
-);
+const sortSpans = document.querySelectorAll(".sort");
 
 // Handle Submit
 const handleSubmit = (e) => {
@@ -45,10 +36,11 @@ const handleSubmit = (e) => {
     editIndex = NaN;
     submitBtn.innerHTML = "Submit";
   }
-  setLocatStorage();
+  setLocalStorage();
   displayData(employees);
 };
 
+// Display Data
 const displayData = (employeesData) => {
   // display form
   tableBody.innerHTML = employeesData
@@ -66,7 +58,7 @@ const displayData = (employeesData) => {
 `;
     })
     .join("");
-
+  // clear inputs
   firstNameInput.value = "";
   lastNameInput.value = "";
   idInput.value = "";
@@ -83,14 +75,15 @@ const getTotalMonthly = () => {
     return total + current.annualSalary / 12;
   }, 0);
 };
+// Display employees data when page initially loads
+displayData(employees);
 
 // remove employee
 const removeEmployee = (e) => {
   employees.splice(e.target.parentElement.dataset.id, 1);
-  setLocatStorage();
+  setLocalStorage();
   displayData(employees);
 };
-displayData(employees);
 
 // edit employee
 const editEmployee = (e) => {
@@ -109,30 +102,29 @@ const editEmployee = (e) => {
 };
 
 // Local Storage
-const setLocatStorage = () => {
+const setLocalStorage = () => {
   localStorage.setItem("employees", JSON.stringify(employees));
 };
 
 // Sort
-sortSalaryAscendingBtn.addEventListener("click", () => {
-  displayData(sort(employees, "annualSalary", "ascending"));
-  setLocatStorage();
-});
-sortSalaryDescendingBtn.addEventListener("click", () => {
-  displayData(sort(employees, "annualSalary", "descending"));
-  setLocatStorage();
-});
-sortLastNameAscendingBtn.addEventListener("click", () => {
-  displayData(sort(employees, "lastName", "ascending"));
-  setLocatStorage();
-});
-sortLastNameDescendingBtn.addEventListener("click", () => {
-  displayData(sort(employees, "lastName", "descending"));
-  setLocatStorage();
-});
-
-const sort = (unsorted, property, direction) => {
-  if (property === "annualSalary") {
+// // Add Event Listeners to spans
+for (let sortSpan of sortSpans) {
+  sortSpan.addEventListener("click", () => {
+    console.log("hi");
+    displayData(
+      sort(
+        employees,
+        sortSpan.dataset.property,
+        sortSpan.dataset.direction,
+        sortSpan.dataset.type
+      )
+    );
+    setLocalStorage();
+  });
+}
+// // Sort Function
+const sort = (unsorted, property, direction, type) => {
+  if (type === "number") {
     if (direction === "ascending") {
       return unsorted.sort((a, b) => a[property] - b[property]);
     }
@@ -140,7 +132,7 @@ const sort = (unsorted, property, direction) => {
       return unsorted.sort((a, b) => b[property] - a[property]);
     }
   }
-  if (property === "lastName") {
+  if (type === "string") {
     if (direction === "ascending") {
       return unsorted.sort((a, b) =>
         a[property].toLowerCase() < b[property].toLowerCase() ? -1 : 1

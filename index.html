@@ -85,32 +85,111 @@
     <div class="table-control">
       <table>
         <thead>
+          <!-- title -->
           <h2>Employees</h2>
+          <!-- end title -->
+          <!-- table headers -->
           <tr>
-            <th>Frist Name</th>
+            <!-- first name header -->
             <th>
-              Last Name
-              <span class="sort-last-name-ascending"
-                ><i class="fa-solid fa-caret-up up sort-last-name-ascending"></i
-              ></span>
-              <span class="sort-last-name-descending"
-                ><i class="fa-solid fa-caret-down down"></i
-              ></span>
-            </th>
-            <th>ID#</th>
-            <th>Job Title</th>
-            <th>
-              Annual Salary
-              <span class="sort-salary-ascending"
+              Frist Name
+              <span
+                class="sort"
+                data-property="firstName"
+                data-direction="ascending"
+                data-type="string"
                 ><i class="fa-solid fa-caret-up up"></i
               ></span>
-              <span class="sort-salary-descending"
+              <span
+                class="sort"
+                data-property="firstName"
+                data-direction="descending"
+                data-type="string"
                 ><i class="fa-solid fa-caret-down down"></i
               ></span>
             </th>
+            <!-- end first name header -->
+            <!-- last name header -->
+            <th>
+              Last Name
+              <span
+                class="sort"
+                data-property="lastName"
+                data-direction="ascending"
+                data-type="string"
+                ><i class="fa-solid fa-caret-up up"></i
+              ></span>
+              <span
+                class="sort"
+                data-property="lastName"
+                data-direction="descending"
+                data-type="string"
+                ><i class="fa-solid fa-caret-down down"></i
+              ></span>
+            </th>
+            <!-- end last name header -->
+            <!-- ID header -->
+            <th>
+              ID#
+              <span
+                class="sort"
+                data-property="id"
+                data-direction="ascending"
+                data-type="number"
+                ><i class="fa-solid fa-caret-up up"></i
+              ></span>
+              <span
+                class="sort"
+                data-property="id"
+                data-direction="descending"
+                data-type="number"
+                ><i class="fa-solid fa-caret-down down"></i
+              ></span>
+            </th>
+            <!-- end ID header -->
+            <!-- Job title header -->
+            <th>
+              Job Title
+              <span
+                class="sort"
+                data-property="jobTitle"
+                data-direction="ascending"
+                data-type="string"
+                ><i class="fa-solid fa-caret-up up"></i
+              ></span>
+              <span
+                class="sort"
+                data-property="jobTitle"
+                data-direction="descending"
+                data-type="string"
+                ><i class="fa-solid fa-caret-down down"></i
+              ></span>
+            </th>
+            <!-- end Job title header -->
+            <!-- Annual Salary header -->
+
+            <th>
+              Annual Salary
+              <span
+                class="sort sort-salary-ascending"
+                data-property="annualSalary"
+                data-direction="ascending"
+                data-type="number"
+                ><i class="fa-solid fa-caret-up up"></i
+              ></span>
+              <span
+                class="sort sort-salary-descending"
+                data-property="annualSalary"
+                data-direction="descending"
+                data-type="number"
+                ><i class="fa-solid fa-caret-down down"></i
+              ></span>
+            </th>
+            <!-- end Annual Salary header -->
             <th></th>
             <th></th>
           </tr>
+          <!-- end table headers -->
         </thead>
         <tbody></tbody>
       </table>
@@ -118,7 +197,7 @@
     <!-- End of Table -->
     <!-- Total Monthly Salary Expense -->
     <h2 class="total-monthly">
-      Total Monthly: $<span class="total-monthly-span">123,456.00</span>
+      Total Monthly: $<span class="total-monthly-span">0</span>
     </h2>
     <!-- End of Total Monthly Salary Expense -->
     <script src="./index.js"></script>

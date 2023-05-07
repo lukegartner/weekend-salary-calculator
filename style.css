@@ -101,6 +101,37 @@ table {
 .row-light {
   background-color: var(--blue-1);
 }
+.down {
+  transform: translate(-141%, 25%);
+  color: var(--blue-2);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.up {
+  transform: translate(0, -25%);
+  color: var(--blue-2);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.delete {
+  text-align: center;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.delete:hover {
+  color: var(--red-1);
+}
+.edit {
+  text-align: center;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.edit:hover {
+  color: var(--blue-1);
+}
+.row-light .edit:hover {
+  color: var(--blue-2);
+}
 
 /* total */
 .total-monthly {

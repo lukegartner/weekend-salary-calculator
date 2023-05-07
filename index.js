@@ -60,8 +60,8 @@ const displayData = (employeesData) => {
             <td>${id}</td>
             <td>${jobTitle}</td>
             <td>$${annualSalary}</td>
-            <td onClick="removeEmployee(event)">x</td>
-            <td onClick="editEmployee(event)">edit</td>
+            <td onClick="removeEmployee(event)" class="delete"><i class="fa-solid fa-delete-left"></i></td>
+            <td onClick="editEmployee(event)" class="edit"><i class="fa-solid fa-pen-to-square"></i></td>
           </tr>
 `;
     })
@@ -91,10 +91,11 @@ const removeEmployee = (e) => {
   displayData(employees);
 };
 displayData(employees);
+
 // edit employee
 const editEmployee = (e) => {
   const { firstName, lastName, id, jobTitle, annualSalary } =
-    employees[e.target.parentElement.dataset.id];
+    employees[e.currentTarget.parentElement.dataset.id];
 
   firstNameInput.value = firstName;
   lastNameInput.value = lastName;
@@ -104,7 +105,7 @@ const editEmployee = (e) => {
 
   submitBtn.innerHTML = "Edit";
   isEditing = true;
-  editIndex = e.target.parentElement.dataset.id;
+  editIndex = e.currentTarget.parentElement.dataset.id;
 };
 
 // Local Storage

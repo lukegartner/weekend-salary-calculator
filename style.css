@@ -113,6 +113,11 @@ table {
   cursor: pointer;
   font-size: 0.9rem;
 }
+.up:hover,
+.down:hover {
+  transition: 0.2s;
+  color: var(--blue-1);
+}
 .delete {
   text-align: center;
   cursor: pointer;

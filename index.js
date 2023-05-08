@@ -51,7 +51,7 @@ const displayData = (employeesData) => {
             <td>${lastName}</td>
             <td>${id}</td>
             <td>${jobTitle}</td>
-            <td>$${annualSalary}</td>
+            <td>${formatSalary(annualSalary)}</td>
             <td onClick="removeEmployee(event)" class="delete"><i class="fa-solid fa-delete-left"></i></td>
             <td onClick="editEmployee(event)" class="edit"><i class="fa-solid fa-pen-to-square"></i></td>
           </tr>
@@ -65,7 +65,7 @@ const displayData = (employeesData) => {
   jobTitleInput.value = "";
   annualSalaryInput.value = "";
 
-  totalMonthlySpan.innerHTML = getTotalMonthly();
+  totalMonthlySpan.innerHTML = formatSalary(getTotalMonthly());
   totalMonthlySpan.classList = getTotalMonthly() >= 20000 ? "red" : "";
 };
 
@@ -75,6 +75,15 @@ const getTotalMonthly = () => {
     return total + current.annualSalary / 12;
   }, 0);
 };
+
+// Format Salary
+const formatSalary = (salary) => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(salary);
+};
+
 // Display employees data when page initially loads
 displayData(employees);
 
@@ -110,7 +119,6 @@ const setLocalStorage = () => {
 // // Add Event Listeners to spans
 for (let sortSpan of sortSpans) {
   sortSpan.addEventListener("click", () => {
-    console.log("hi");
     displayData(
       sort(
         employees,

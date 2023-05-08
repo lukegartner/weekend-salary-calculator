@@ -89,7 +89,7 @@ displayData(employees);
 
 // remove employee
 const removeEmployee = (e) => {
-  employees.splice(e.target.parentElement.dataset.id, 1);
+  employees.splice(e.currentTarget.parentElement.dataset.id, 1);
   setLocalStorage();
   displayData(employees);
 };

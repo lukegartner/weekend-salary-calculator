@@ -3,6 +3,11 @@ const employees = localStorage.getItem("employees")
   ? JSON.parse(localStorage.getItem("employees"))
   : [];
 
+// Monthly Budget
+let monthlyBudget = localStorage.getItem("monthlyBudget")
+  ? JSON.parse(localStorage.getItem("monthlyBudget"))
+  : 20000;
+
 // Edit variables
 let isEditing = false;
 let editIndex = NaN;
@@ -13,8 +18,10 @@ const lastNameInput = document.querySelector("#last-name");
 const idInput = document.querySelector("#id-number");
 const jobTitleInput = document.querySelector("#job-title");
 const annualSalaryInput = document.querySelector("#annual-salary");
+const monthlyBudgetInput = document.querySelector("#monthly-budget");
 const tableBody = document.querySelector("tbody");
 const totalMonthlySpan = document.querySelector(".total-monthly-span");
+const monthlyBudgetSpan = document.querySelector(".monthly-budget-span");
 const submitBtn = document.querySelector(".submit-btn");
 const sortSpans = document.querySelectorAll(".sort");
 
@@ -66,7 +73,8 @@ const displayData = (employeesData) => {
   annualSalaryInput.value = "";
 
   totalMonthlySpan.innerHTML = formatSalary(getTotalMonthly());
-  totalMonthlySpan.classList = getTotalMonthly() >= 20000 ? "red" : "";
+  totalMonthlySpan.classList = getTotalMonthly() >= monthlyBudget ? "red" : "";
+  monthlyBudgetSpan.innerHTML = formatSalary(monthlyBudget);
 };
 
 // get total monthly
@@ -113,6 +121,7 @@ const editEmployee = (e) => {
 // Local Storage
 const setLocalStorage = () => {
   localStorage.setItem("employees", JSON.stringify(employees));
+  localStorage.setItem("monthlyBudget", JSON.stringify(monthlyBudget));
 };
 
 // Sort
@@ -152,4 +161,13 @@ const sort = (unsorted, property, direction, type) => {
       );
     }
   }
+};
+
+// Set Monthly Budget
+const setMonthlyBudget = (e) => {
+  e.preventDefault();
+  console.log("hi");
+  monthlyBudget = Number(monthlyBudgetInput.value);
+  setLocalStorage();
+  displayData(employees);
 };

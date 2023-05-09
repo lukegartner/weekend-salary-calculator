@@ -14,6 +14,10 @@ The user experience is intuitive as buttons and actionable icons deliver visual 
 
 To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](https://payrolltracker.netlify.app/)
 
+## Screenshot
+
+![alt text](./screenshot.png)
+
 ## Built With
 
 Javascript, HTML, CSS

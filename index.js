@@ -50,14 +50,18 @@ const handleSubmit = (e) => {
 const displayData = (employeesData) => {
   // display form
   tableBody.innerHTML = employeesData
-    .map(({ firstName, lastName, id, jobTitle, annualSalary }, index) => {
+    .map((employee, index) => {
+      const employeeColumns = [];
+      for (let key in employee) {
+        employeeColumns.push(
+          `<td>${
+            key === "annualSalary" ? formatSalary(employee[key]) : employee[key]
+          }</td>`
+        );
+      }
       return `
           <tr data-id="${index}" class=${index % 2 !== 0 ? "row-light" : ""} >
-            <td>${firstName}</td>
-            <td>${lastName}</td>
-            <td>${id}</td>
-            <td>${jobTitle}</td>
-            <td>${formatSalary(annualSalary)}</td>
+            ${employeeColumns.join("")}
             <td onClick="removeEmployee(event)" class="delete"><i class="fa-solid fa-delete-left"></i></td>
             <td onClick="editEmployee(event)" class="edit"><i class="fa-solid fa-pen-to-square"></i></td>
           </tr>
@@ -176,6 +180,7 @@ const fieldsData = [
     type: "number",
     id: "annual-salary",
   },
+  { title: "Comment", property: "comment", type: "text", id: "comment" },
 ];
 
 // Generate Inputs

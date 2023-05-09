@@ -13,11 +13,7 @@ let isEditing = false;
 let editIndex = NaN;
 
 // DOM variables
-let firstNameInput = document.querySelector("#first-name");
-let lastNameInput = document.querySelector("#last-name");
-let idInput = document.querySelector("#id-number");
-let jobTitleInput = document.querySelector("#job-title");
-let annualSalaryInput = document.querySelector("#annual-salary");
+let employeeInputs;
 const monthlyBudgetInput = document.querySelector("#monthly-budget");
 const tableBody = document.querySelector("tbody");
 const totalMonthlySpan = document.querySelector(".total-monthly-span");
@@ -30,16 +26,17 @@ const inputContainer = document.querySelector(".input-container");
 // Handle Submit
 const handleSubmit = (e) => {
   e.preventDefault();
-  const employee = {
-    firstName: firstNameInput.value,
-    lastName: lastNameInput.value,
-    id: idInput.value,
-    jobTitle: jobTitleInput.value,
-    annualSalary: annualSalaryInput.value,
-  };
+  // Construct object containing employee data
+  let employee = {};
+  for (let input of employeeInputs) {
+    employee[input.lastElementChild.dataset.property] =
+      input.lastElementChild.value;
+  }
+  // If not editing add employee object to end of employees array
   if (!isEditing) {
     employees.push(employee);
   } else if (isEditing) {
+    // If editing replace employee current data with data from inputs
     employees[editIndex] = employee;
     isEditing = false;
     editIndex = NaN;
@@ -68,11 +65,9 @@ const displayData = (employeesData) => {
     })
     .join("");
   // clear inputs
-  firstNameInput.value = "";
-  lastNameInput.value = "";
-  idInput.value = "";
-  jobTitleInput.value = "";
-  annualSalaryInput.value = "";
+  for (let input of employeeInputs) {
+    input.lastElementChild.value = "";
+  }
 
   totalMonthlySpan.innerHTML = formatSalary(getTotalMonthly());
   totalMonthlySpan.classList = getTotalMonthly() >= monthlyBudget ? "red" : "";
@@ -103,14 +98,12 @@ const removeEmployee = (e) => {
 
 // edit employee
 const editEmployee = (e) => {
-  const { firstName, lastName, id, jobTitle, annualSalary } =
-    employees[e.currentTarget.parentElement.dataset.id];
+  const employeeToEdit = employees[e.currentTarget.parentElement.dataset.id];
 
-  firstNameInput.value = firstName;
-  lastNameInput.value = lastName;
-  idInput.value = id;
-  jobTitleInput.value = jobTitle;
-  annualSalaryInput.value = annualSalary;
+  for (let input of employeeInputs) {
+    input.lastElementChild.value =
+      employeeToEdit[input.lastElementChild.dataset.property];
+  }
 
   submitBtn.innerHTML = "Edit";
   isEditing = true;
@@ -152,7 +145,6 @@ const sort = (unsorted, property, direction, type) => {
 // Set Monthly Budget
 const setMonthlyBudget = (e) => {
   e.preventDefault();
-  console.log("hi");
   monthlyBudget = Number(monthlyBudgetInput.value);
   setLocalStorage();
   displayData(employees);
@@ -189,7 +181,7 @@ const fieldsData = [
 // Generate Inputs
 const generateInputs = (inputsData) => {
   inputContainer.innerHTML = inputsData
-    .map(({ title, type, id }) => {
+    .map(({ title, property, type, id }) => {
       return `
           <div class="input">
             <label for="${id}">${title}</label>
@@ -197,6 +189,7 @@ const generateInputs = (inputsData) => {
               type="${type}"
               name="${id}"
               id="${id}"
+              data-property="${property}"
               placeholder="${title}"
             />
           </div>
@@ -205,11 +198,7 @@ const generateInputs = (inputsData) => {
     .join("");
 
   // Assign to variables
-  firstNameInput = document.querySelector("#first-name");
-  lastNameInput = document.querySelector("#last-name");
-  idInput = document.querySelector("#id-number");
-  jobTitleInput = document.querySelector("#job-title");
-  annualSalaryInput = document.querySelector("#annual-salary");
+  employeeInputs = document.querySelectorAll(".input");
 };
 
 // Generate Table Headers

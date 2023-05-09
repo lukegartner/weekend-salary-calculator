@@ -95,6 +95,10 @@ th {
   background-color: var(--blue-3);
   color: var(--light-1);
 }
+td {
+  max-width: 5rem;
+  overflow: scroll;
+}
 table {
   border-collapse: collapse;
   width: 95%;
